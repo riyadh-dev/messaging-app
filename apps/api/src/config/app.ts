@@ -56,11 +56,9 @@ export default function createExpressApp(): Express {
 	app.use('/api/friend-requests', friendRequestRouter);
 
 	// Serve static assets in production
-	console.log(process.env.NODE_ENV);
-	if (process.env.NODE_ENV) {
+	if (IS_PROD) {
 		app.use(express.static(path.join(__dirname, '../../web/dist')));
 		app.get('/', function (req, res) {
-			console.log(IS_PROD);
 			res.sendFile(path.join(__dirname, '../../web/dist', 'index.html'));
 		});
 	}
